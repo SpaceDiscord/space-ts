@@ -1,0 +1,30 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ES2019",
+    "alwaysStrict": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationDir": "typings/",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "noUnusedParameters": true,
+    "pretty": true,
+    "removeComments": true,
+    "outDir": "build"
+  },
+  "exclude": [
+    "tests",
+    "node_modules",
+    "examples"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+}
