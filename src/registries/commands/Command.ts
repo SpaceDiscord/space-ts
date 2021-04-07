@@ -1,10 +1,12 @@
 import { Constants } from "eris";
 import { Util } from "../../util/Util";
+import { Context } from "./Context";
 
 export interface Argument {
   type?: string;
   key: string;
   defaultValue?: any;
+  flag?: boolean;
 
   // this is for the type number
   min?: number;
@@ -89,5 +91,5 @@ export abstract class Command {
     this.shouldEdit = options?.shouldEdit ?? true;
   }
 
-  abstract run(): any;
+  abstract run(ctx: Context): any;
 }

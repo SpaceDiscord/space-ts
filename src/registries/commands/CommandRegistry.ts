@@ -106,7 +106,11 @@ export class CommandRegistry extends Registry<Command> {
     if (command) {
       const result = new Parser(
         args.join(" "),
-        { seperator: " ", quoted: true, flags: [] },
+        {
+          seperator: " ",
+          quoted: true,
+          flags: command.args.filter((arg) => arg.flag),
+        },
         this.resolver
       ).parse();
 
@@ -123,6 +127,14 @@ export class CommandRegistry extends Registry<Command> {
         );
 
         this.contexts.set(message.id, context);
+      }
+
+      try {
+        command.run(context);
+
+        this.emit("commandRan", context, command);
+      } catch (error) {
+        this.emit("commandError", context, command, error);
       }
     }
   }
