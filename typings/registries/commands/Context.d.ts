@@ -1,0 +1,30 @@
+import { Client, Guild, Member, Message, Shard, TextableChannel, User, MessageContent } from "eris";
+import { MessageableEmbed } from "../../util";
+import { Embed } from "../../util/Embed";
+import { ParserResult } from "./arguments";
+import { Command } from "./Command";
+import { CommandRegistry } from "./CommandRegistry";
+export declare class Context {
+    client: Client;
+    registry: CommandRegistry;
+    command: Command;
+    message: Message;
+    guild: Guild | null;
+    shard: Shard | null;
+    channel: TextableChannel;
+    author: User;
+    member: Member | null;
+    prefix: string;
+    trigger: string;
+    flags: Map<string, any>;
+    args: any[];
+    rawArgs: any[];
+    failedArgs: any[];
+    lastResponse: Message;
+    shouldEdit: boolean;
+    constructor(client: Client, message: Message, command: Command, trigger: string, prefix: string, registry: CommandRegistry, parserResult: ParserResult);
+    send(message: string | MessageContent | Embed): Promise<Message<TextableChannel>>;
+    reply(to: Message | string, message: string | MessageContent | Embed): Promise<Message<TextableChannel>>;
+    quote(to: Message | string, message: string | MessageContent | Embed): Promise<Message<TextableChannel>>;
+    get embed(): MessageableEmbed;
+}
