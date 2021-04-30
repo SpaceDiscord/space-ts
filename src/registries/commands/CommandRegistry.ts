@@ -45,15 +45,15 @@ export class CommandRegistry extends Registry<Command> {
         continue;
       }
 
-      if (!(command instanceof Command)) {
-        ++unsuccessful;
-        continue;
-      }
+      // if (!(command instanceof Command)) {
+      //   ++unsuccessful;
+      //   continue;
+      // }
 
-      // @ts-expect-error
+      //// @ts-expect-error
       command = new command() as Command;
 
-      if (this.modules.has(command.name)) {
+      if (this.modules.has(command.trigger)) {
         ++unsuccessful;
         continue;
       }
@@ -67,14 +67,14 @@ export class CommandRegistry extends Registry<Command> {
         }
       }
 
-      this.modules.set(command.name, command);
+      this.modules.set(command.trigger, command);
 
-      const categories = this.categories.get(command.category) ?? [];
+      const categories = this.categories.get(command.category ?? "") ?? [];
       categories.push(command.category);
-      this.categories.set(command.category, command);
+      this.categories.set(command.category, categories);
     }
 
-    this.emit("loaded", this.modules.size, unsuccessful);
+    this.emit("loaded", this.modules.size, this.modules.size - unsuccessful);
   }
 
   public unload() {

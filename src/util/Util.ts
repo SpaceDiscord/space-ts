@@ -1,4 +1,4 @@
-import { readFileSync, lstatSync } from "fs";
+import { readdirSync, lstatSync } from "fs";
 import { join, extname } from "path";
 
 export class Util {
@@ -7,7 +7,7 @@ export class Util {
       return [];
     }
 
-    for (const file in readFileSync(directory)) {
+    for (const file of readdirSync(directory)) {
       const path = join(directory, file);
 
       if (lstatSync(path).isDirectory()) {
